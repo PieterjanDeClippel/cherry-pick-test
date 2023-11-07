@@ -1,0 +1,64 @@
+on:
+  pull_request:
+    branches:
+      - main
+    types: ["closed"]
+
+jobs:
+  cherry_pick_release_v1:
+    runs-on: ubuntu-latest
+    name: Cherry pick into release-v1.0
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'release-v1') && github.event.pull_request.merged == true }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Cherry pick into release-v1
+        uses: carloscastrojumo/github-cherry-pick-action@v1
+        with:
+          branch: release-v1
+          labels: |
+            cherry-pick
+          reviewers: |
+            aReviewerUser
+  cherry_pick_release_v2:
+    runs-on: ubuntu-latest
+    name: Cherry pick into release-v2
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'release-v2') && github.event.pull_request.merged == true }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Cherry pick into release-v2
+        uses: carloscastrojumo/github-cherry-pick-action@v1
+        with:
+          branch: release-v2
+          labels: |
+            cherry-pick
+          reviewers: |
+            aReviewerUser
+          title: '[cherry-pick] {old_title}'
+          body: 'Cherry picking #{old_pull_request_id} onto this branch'
+  cherry_pick_release_v3:
+    runs-on: ubuntu-latest
+    name: Cherry pick into release-v2
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'release-v3') && github.event.pull_request.merged == true }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Cherry pick into release-v3
+        uses: carloscastrojumo/github-cherry-pick-action@v1
+        with:
+          branch: release-v3
+          labels: |
+            cherry-pick
+          reviewers: |
+            aReviewerUser
+          title: '[cherry-pick] {old_title}'
+          body: 'Cherry picking #{old_pull_request_id} onto this branch'
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
