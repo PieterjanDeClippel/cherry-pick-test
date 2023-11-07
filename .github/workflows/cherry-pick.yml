@@ -22,6 +22,9 @@ jobs:
             cherry-pick
           reviewers: |
             aReviewerUser
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   cherry_pick_release_v2:
     runs-on: ubuntu-latest
     name: Cherry pick into release-v2
@@ -41,6 +44,9 @@ jobs:
             aReviewerUser
           title: '[cherry-pick] {old_title}'
           body: 'Cherry picking #{old_pull_request_id} onto this branch'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   cherry_pick_release_v3:
     runs-on: ubuntu-latest
     name: Cherry pick into release-v2
@@ -60,5 +66,7 @@ jobs:
             aReviewerUser
           title: '[cherry-pick] {old_title}'
           body: 'Cherry picking #{old_pull_request_id} onto this branch'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
